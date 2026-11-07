@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#17603f">
+<title>Parent Portal</title>
+<style>
+:root{
+  --ink:#10231b; --muted:#3c5348; --paper:#eef3f0; --card:#ffffff; --line:#cfdcd5;
+  --green:#17603f; --green-soft:#dcefe5; --amber:#8a4b00; --amber-soft:#fcefd2; --red:#a4262c; --red-soft:#fbe3e3;
+  --radius:12px;
+}
+@media (prefers-color-scheme:dark){
+  :root{ --ink:#e8f3ed; --muted:#a9c2b5; --paper:#0d1a14; --card:#14251c; --line:#27402f; --green:#4fc08a; --green-soft:#17382a; --amber:#f0b45a; --amber-soft:#3a2a0e; --red:#f19a9d; --red-soft:#3a1618; }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+body.rtl{font-family:"Noto Nastaliq Urdu","Noto Naskh Arabic","Jameel Noori Nastaleeq","Segoe UI",Tahoma,serif;font-size:18px;line-height:1.9}
+button,input{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--green);outline-offset:2px}
+.wrap{max-width:520px;margin:0 auto;padding:0 16px 40px}
+header{background:var(--green);color:#fff;padding:14px 16px 16px}
+header .in{max-width:520px;margin:0 auto}
+header h1{margin:0;font-size:1.25rem;line-height:1.35;font-weight:700}
+header p{margin:2px 0 0;font-size:.9rem;opacity:.9}
+.langs{display:flex;gap:6px;margin-top:10px}
+.langs button{border:1.5px solid rgba(255,255,255,.65);background:transparent;color:#fff;border-radius:999px;padding:4px 14px;cursor:pointer;min-height:36px}
+.langs button[aria-pressed="true"]{background:#fff;color:#17603f;border-color:#fff;font-weight:700}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px;margin-top:16px}
+label{display:block;font-weight:600;margin:12px 0 4px}
+input{width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:10px;background:var(--paper);font-size:1.1rem;letter-spacing:.06em;direction:ltr;text-align:start}
+.btn{display:block;width:100%;margin-top:16px;padding:13px;border:0;border-radius:10px;background:var(--green);color:#fff;font-weight:700;cursor:pointer;min-height:48px}
+body:not(.rtl) .btn{font-size:1.05rem}
+.btn[disabled]{opacity:.6}
+.btn.ghost{background:transparent;color:var(--green);border:1.5px solid var(--green);margin-top:12px}
+.err{margin-top:12px;padding:10px 12px;border-radius:10px;background:var(--red-soft);color:var(--red);font-weight:600}
+.priv{margin-top:14px;font-size:.85rem;color:var(--muted)}
+.kid h2{margin:0;font-size:1.5rem;line-height:1.3}
+.kid p{margin:4px 0 0;color:var(--muted)}
+.tabs{display:flex;gap:4px;margin-top:16px;background:var(--line);padding:4px;border-radius:12px}
+.tabs button{flex:1;border:0;background:transparent;padding:9px 4px;border-radius:9px;cursor:pointer;font-weight:600;min-height:44px;color:var(--ink)}
+.tabs button[aria-selected="true"]{background:var(--card);color:var(--green);box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.big{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.big strong{font-size:3rem;line-height:1;font-weight:800;color:var(--green)}
+.big span{color:var(--muted)}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.chip{padding:5px 12px;border-radius:999px;font-weight:600;font-size:.9rem;border:1.5px solid var(--line)}
+.chip.p{background:var(--green-soft);color:var(--green);border-color:transparent}
+.chip.a{background:var(--red-soft);color:var(--red);border-color:transparent}
+.chip.l{background:var(--amber-soft);color:var(--amber);border-color:transparent}
+h3{margin:20px 0 8px;font-size:1rem}
+.mrow{margin-top:10px}
+.mrow .top{display:flex;justify-content:space-between;gap:8px;font-size:.9rem}
+.cnt{display:flex;gap:14px;flex-wrap:wrap;font-size:.85rem;margin-top:4px;font-weight:600}
+.cnt .p{color:var(--green)} .cnt .a{color:var(--red)} .cnt .l{color:var(--amber)}
+.bar{display:flex;height:12px;border-radius:6px;overflow:hidden;background:var(--line);margin-top:4px}
+.bar i{display:block;height:100%}
+.bar .p{background:var(--green)} .bar .a{background:var(--red)} .bar .l{background:var(--amber)}
+.banner{padding:12px 14px;border-radius:10px;font-weight:700}
+.banner.ok{background:var(--green-soft);color:var(--green)}
+.banner.due{background:var(--red-soft);color:var(--red)}
+.banner.none{background:var(--line);color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:12px}
+.cell{border:1.5px solid var(--line);border-radius:8px;text-align:center;padding:6px 2px;font-size:.8rem;line-height:1.3}
+.cell b{display:block;font-size:1rem}
+.cell.paid{background:var(--green-soft);border-color:transparent;color:var(--green)}
+.cell.due{background:var(--red-soft);border-color:var(--red);color:var(--red)}
+.cell.later{color:var(--muted)}
+table{width:100%;border-collapse:collapse;margin-top:8px}
+th,td{padding:9px 6px;border-bottom:1px solid var(--line);text-align:start}
+td.n,th.n{text-align:end;direction:ltr;white-space:nowrap}
+tfoot td{font-weight:700;border-bottom:0}
+.badge{display:inline-block;padding:3px 14px;border-radius:999px;font-weight:700}
+.badge.pass{background:var(--green-soft);color:var(--green)}
+.badge.fail{background:var(--red-soft);color:var(--red)}
+.note{padding:12px 0;border-bottom:1px solid var(--line)}
+.note:last-child{border-bottom:0}
+.note small{color:var(--muted);display:block}
+.note h4{margin:2px 0 4px;font-size:1.05rem}
+.note p{margin:0;white-space:pre-wrap;overflow-wrap:anywhere}
+.empty{color:var(--muted);padding:6px 0}
+.foot{margin-top:16px;font-size:.85rem;color:var(--muted);text-align:center}
+[hidden]{display:none!important}
+</style>
+</head>
+<body class="rtl">
+<header>
+  <div class="in">
+    <h1 id="sname">…</h1>
+    <p id="stitle"></p>
+    <div class="langs" role="group" aria-label="Language">
+      <button type="button" data-l="ur" aria-pressed="true">اردو</button>
+      <button type="button" data-l="sd" aria-pressed="false">سنڌي</button>
+      <button type="button" data-l="en" aria-pressed="false">English</button>
+    </div>
+  </div>
+</header>
+<main class="wrap">
+  <section id="login" class="card">
+    <form id="f" autocomplete="off">
+      <label for="gr" id="lGr"></label>
+      <input id="gr" name="gr" inputmode="numeric" pattern="[0-9]*" autocomplete="off" required>
+      <label for="pin" id="lPin"></label>
+      <input id="pin" name="pin" inputmode="numeric" pattern="[0-9]*" type="password" autocomplete="off" required>
+      <div id="err" class="err" role="alert" hidden></div>
+      <button class="btn" id="go" type="submit"></button>
+    </form>
+    <p class="priv" id="priv"></p>
+  </section>
+  <section id="view" hidden>
+    <div class="card kid" id="kid"></div>
+    <div class="tabs" role="tablist" id="tabs"></div>
+    <div class="card" id="pane" role="tabpanel"></div>
+    <div class="foot" id="upd"></div>
+    <button class="btn ghost" id="exit" type="button"></button>
+  </section>
+</main>
+<script>
+/*TEXT-START*/
+var T={
+ en:{title:'Parent Portal',gr:'GR No.',pin:'PIN',open:'Open',wrong:'GR No. or PIN is not correct.',wait:'Too many wrong tries. Please wait',sec:'seconds',nodata:'Could not load school data. Check your internet and try again.',nocrypto:'Please open this page through a secure (https) link.',loading:'Opening…',att:'Attendance',fee:'Fees',res:'Result',nts:'Notices',present:'Present',absent:'Absent',leave:'Leave',attLabel:'Attendance this year',noAtt:'No attendance has been recorded yet.',recentAbs:'Recent absences',monthly:'Monthly fee',allPaid:'All fees are paid',dueLbl:'Fee due',noFee:'No fee is set for this student.',paidOn:'Paid on',receipt:'Receipt',subject:'Subject',marks:'Marks',total:'Total',pct:'Percentage',pass:'Pass',fail:'Fail',noRes:'Result is not available yet.',noNts:'No notices right now.',father:'Father',cls:'Class',updated:'Last updated',exit:'Close',priv:'This page is private. Only someone with the GR No. and PIN can see this record.',rs:'Rs',mths:'months',month:'month',evt:'On',recs:'Payment record'},
+ ur:{title:'والدین پورٹل',gr:'جی آر نمبر',pin:'پن',open:'کھولیں',wrong:'جی آر نمبر یا پن درست نہیں ہے۔',wait:'کئی بار غلط کوشش ہو چکی ہے۔ براہ کرم انتظار کریں',sec:'سیکنڈ',nodata:'اسکول کا ڈیٹا لوڈ نہیں ہو سکا۔ انٹرنیٹ چیک کر کے دوبارہ کوشش کریں۔',nocrypto:'براہ کرم یہ صفحہ محفوظ (https) لنک سے کھولیں۔',loading:'کھل رہا ہے…',att:'حاضری',fee:'فیس',res:'نتیجہ',nts:'نوٹس',present:'حاضر',absent:'غیر حاضر',leave:'رخصت',attLabel:'اس سال کی حاضری',noAtt:'ابھی تک حاضری درج نہیں ہوئی۔',recentAbs:'حالیہ غیر حاضریاں',monthly:'ماہانہ فیس',allPaid:'تمام فیس ادا ہے',dueLbl:'واجب الادا فیس',noFee:'اس طالب علم کی فیس مقرر نہیں ہے۔',paidOn:'ادائیگی کی تاریخ',receipt:'رسید',subject:'مضمون',marks:'نمبر',total:'کل',pct:'فیصد',pass:'پاس',fail:'فیل',noRes:'نتیجہ ابھی دستیاب نہیں۔',noNts:'فی الحال کوئی نوٹس نہیں۔',father:'والد',cls:'کلاس',updated:'آخری اپڈیٹ',exit:'بند کریں',priv:'یہ صفحہ نجی ہے۔ صرف جی آر نمبر اور پن والا ہی یہ ریکارڈ دیکھ سکتا ہے۔',rs:'روپے',mths:'ماہ',month:'ماہ',evt:'تاریخ',recs:'ادائیگی کا ریکارڈ'},
+ sd:{title:'والدين پورٽل',gr:'جي آر نمبر',pin:'پن',open:'کوليو',wrong:'جي آر نمبر يا پن صحيح ناهي.',wait:'ڪيتريون ئي غلط ڪوششون ٿي چڪيون آهن. مهرباني ڪري انتظار ڪريو',sec:'سيڪنڊ',nodata:'اسڪول جو ڊيٽا لوڊ نه ٿي سگهيو. انٽرنيٽ چيڪ ڪري ٻيهر ڪوشش ڪريو.',nocrypto:'مهرباني ڪري هي صفحو محفوظ (https) لنڪ ذريعي کوليو.',loading:'کلي رهيو آهي…',att:'حاضري',fee:'فيس',res:'نتيجو',nts:'نوٽيس',present:'حاضر',absent:'غير حاضر',leave:'موڪل',attLabel:'هن سال جي حاضري',noAtt:'اڃا تائين حاضري درج نه ٿي آهي.',recentAbs:'تازيون غير حاضريون',monthly:'مهيني جي فيس',allPaid:'سڀ فيس ادا ٿيل آهي',dueLbl:'باقي فيس',noFee:'هن شاگرد جي فيس مقرر ناهي.',paidOn:'ادائگي جي تاريخ',receipt:'رسيد',subject:'مضمون',marks:'نمبر',total:'ڪل',pct:'سيڪڙو',pass:'پاس',fail:'فيل',noRes:'نتيجو اڃا دستياب ناهي.',noNts:'هن وقت ڪو نوٽيس ناهي.',father:'پيءُ',cls:'ڪلاس',updated:'آخري اپڊيٽ',exit:'بند ڪريو',priv:'هي صفحو خانگي آهي. رڳو جي آر نمبر ۽ پن وارو ئي هي رڪارڊ ڏسي سگهي ٿو.',rs:'رپيا',mths:'مهينا',month:'مهينو',evt:'تاريخ',recs:'ادائگي جو رڪارڊ'}
+};
+var MON={
+ en:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+ ur:['جنوری','فروری','مارچ','اپریل','مئی','جون','جولائی','اگست','ستمبر','اکتوبر','نومبر','دسمبر'],
+ sd:['جنوري','فيبروري','مارچ','اپريل','مئي','جون','جولاءِ','آگسٽ','سيپٽمبر','آڪٽوبر','نومبر','ڊسمبر']
+};
+var CLS={
+ ur:{EC:'ای سی',One:'ایک',Two:'دو',Three:'تین',Four:'چار',Five:'پانچ',Six:'چھ',Seven:'سات',Eight:'آٹھ'},
+ sd:{EC:'اي سي',One:'هڪ',Two:'ٻه',Three:'ٽي',Four:'چار',Five:'پنج',Six:'ڇهه',Seven:'ست',Eight:'اٺ'}
+};
+/*TEXT-END*/
+
+/*CRYPTO-START*/
+function unb64(s){var b=atob(s),u=new Uint8Array(b.length);for(var i=0;i<b.length;i++)u[i]=b.charCodeAt(i);return u;}
+function normGr(v){return String(v==null?'':v).trim().replace(/\s+/g,'').replace(/^0+(?=\d)/,'');}
+async function lookupKey(gr,salt){
+  var h=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(salt+'|'+gr));
+  return Array.from(new Uint8Array(h)).slice(0,12).map(function(b){return b.toString(16).padStart(2,'0');}).join('');
+}
+async function deriveKey(gr,pin,salt,iter){
+  var km=await crypto.subtle.importKey('raw',new TextEncoder().encode(gr+':'+pin),'PBKDF2',false,['deriveKey']);
+  return crypto.subtle.deriveKey({name:'PBKDF2',salt:unb64(salt),iterations:iter,hash:'SHA-256'},km,{name:'AES-GCM',length:256},false,['decrypt']);
+}
+// Returns the student's record, or null when GR No. / PIN do not match any record
+async function openRecord(data,grIn,pinIn){
+  var gr=normGr(grIn),pin=String(pinIn||'').trim();
+  var bucket=data.ent[await lookupKey(gr,data.salt)]||[];
+  var key=await deriveKey(gr,pin,data.salt,data.it); // always derive, so a wrong GR No. takes as long as a wrong PIN
+  for(var i=0;i<bucket.length;i++){
+    var e=bucket[i];
+    try{
+      var pt=new Uint8Array(await crypto.subtle.decrypt({name:'AES-GCM',iv:unb64(e.i)},key,unb64(e.c)));
+      if(e.z){pt=new Uint8Array(await new Response(new Blob([pt]).stream().pipeThrough(new DecompressionStream('gzip'))).arrayBuffer());}
+      return JSON.parse(new TextDecoder().decode(pt));
+    }catch(_){}
+  }
+  return null;
+}
+/*CRYPTO-END*/
+
+/*RENDER-START*/
+function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+function fmtDate(iso,L){var m=/^(\d{4})-(\d{2})-(\d{2})/.exec(iso||'');if(!m)return esc(iso||'');return (+m[3])+' '+MON[L][+m[2]-1]+' '+m[1];}
+function monLabel(k,L){var m=/^(\d{4})-(\d{2})/.exec(k||'');return m?MON[L][+m[2]-1]+' '+m[1]:esc(k);}
+function clsName(c,L){return (CLS[L]&&CLS[L][c])||c;}
+function renderKid(r,L){
+  var t=T[L],s=r.st,full=s.n+(s.sn?' '+s.sn:'');
+  return '<h2 dir="auto">'+esc(full)+'</h2><p>'+esc(t.father)+': <span dir="auto">'+esc(s.f||'—')+'</span><br>'+esc(t.cls)+': '+esc(clsName(s.c,L))+' &nbsp; '+esc(t.gr)+': <span dir="ltr">'+esc(s.g)+'</span></p>';
+}
+function renderAtt(r,L){
+  var t=T[L],mo=(r.att&&r.att.mo)||[],p=0,a=0,l=0;
+  mo.forEach(function(x){p+=x.p;a+=x.a;l+=x.l;});
+  var tot=p+a+l;
+  if(!tot)return '<p class="empty">'+esc(t.noAtt)+'</p>';
+  var pct=Math.round(p*1000/tot)/10;
+  var h='<div class="big"><strong>'+pct+'%</strong><span>'+esc(t.attLabel)+'</span></div>'
+   +'<div class="chips"><span class="chip p">'+esc(t.present)+' '+p+'</span><span class="chip a">'+esc(t.absent)+' '+a+'</span><span class="chip l">'+esc(t.leave)+' '+l+'</span></div>';
+  mo.slice().reverse().forEach(function(x){
+    var n=x.p+x.a+x.l;if(!n)return;
+    h+='<div class="mrow"><div class="top"><span>'+esc(monLabel(x.m,L))+'</span></div>'
+     +'<div class="bar" aria-hidden="true">'
+     +'<i class="p" style="width:'+(x.p*100/n)+'%"></i><i class="a" style="width:'+(x.a*100/n)+'%"></i><i class="l" style="width:'+(x.l*100/n)+'%"></i></div>'
+     +'<div class="cnt"><span class="p">'+esc(t.present)+' '+x.p+'</span><span class="a">'+esc(t.absent)+' '+x.a+'</span><span class="l">'+esc(t.leave)+' '+x.l+'</span></div></div>';
+  });
+  var ab=(r.att.ab||[]).slice().reverse();
+  if(ab.length){h+='<h3>'+esc(t.recentAbs)+'</h3><div class="chips">'+ab.map(function(d){return '<span class="chip a">'+fmtDate(d,L)+'</span>';}).join('')+'</div>';}
+  return h;
+}
+function renderFee(r,L){
+  var t=T[L],f=r.fee;
+  if(!f)return '<div class="banner none">'+esc(t.noFee)+'</div>';
+  var paid={},due={};
+  (f.paid||[]).forEach(function(x){paid[x.m]=x;});
+  (f.due||[]).forEach(function(k){due[k]=1;});
+  var h='';
+  if(f.due.length){h+='<div class="banner due">'+esc(t.dueLbl)+': '+esc(t.rs)+' '+f.amt+' ('+f.due.length+' '+esc(f.due.length===1?t.month:t.mths)+')</div>';}
+  else h+='<div class="banner ok">'+esc(t.allPaid)+'</div>';
+  h+='<p style="margin:12px 0 0">'+esc(t.monthly)+': <b dir="ltr">'+esc(t.rs)+' '+f.mo+'</b></p><div class="grid">';
+  for(var i=0;i<12;i++){
+    var k=f.y+'-'+String(i+1).padStart(2,'0'),c=paid[k]?'paid':(due[k]?'due':'later'),mark=paid[k]?'✓':(due[k]?'✗':'–');
+    h+='<div class="cell '+c+'"><b>'+mark+'</b>'+esc(MON[L][i])+'</div>';
+  }
+  h+='</div>';
+  var pr=(f.paid||[]).slice().reverse();
+  if(pr.length){
+    h+='<h3>'+esc(t.recs)+'</h3><table><thead><tr><th>'+esc(t.month)+'</th><th>'+esc(t.paidOn)+'</th><th class="n">'+esc(t.receipt)+'</th></tr></thead><tbody>'
+     +pr.map(function(x){return '<tr><td>'+esc(monLabel(x.m,L))+'</td><td>'+(x.d?fmtDate(x.d,L):'')+'</td><td class="n">'+esc(x.r||'')+'</td></tr>';}).join('')+'</tbody></table>';
+  }
+  return h;
+}
+function renderRes(r,L){
+  var t=T[L],x=r.res;
+  if(!x)return '<p class="empty">'+esc(t.noRes)+'</p>';
+  return '<table><thead><tr><th>'+esc(t.subject)+'</th><th class="n">'+esc(t.marks)+'</th></tr></thead><tbody>'
+   +x.s.map(function(s){return '<tr><td dir="auto">'+esc(s.n)+'</td><td class="n">'+(s.m==null?'—':s.m)+' / 100</td></tr>';}).join('')
+   +'</tbody><tfoot><tr><td>'+esc(t.total)+'</td><td class="n">'+x.t+' / '+x.x+'</td></tr><tr><td>'+esc(t.pct)+'</td><td class="n">'+x.p+'%</td></tr></tfoot></table>'
+   +'<p style="margin:12px 0 0"><span class="badge '+(x.ok?'pass':'fail')+'">'+esc(x.ok?t.pass:t.fail)+'</span></p>';
+}
+function pickText(x,L){
+  var order=[L,'ur','sd','rur','en'];
+  for(var i=0;i<order.length;i++){if(x[order[i]])return {sc:order[i],v:x[order[i]]};}
+  var k=Object.keys(x)[0];return k?{sc:k,v:x[k]}:null;
+}
+function renderNts(r,L){
+  var t=T[L],n=r.nt||[];
+  if(!n.length)return '<p class="empty">'+esc(t.noNts)+'</p>';
+  return n.map(function(o){
+    var p=pickText(o.x||{},L);if(!p)return '';
+    var dir=(p.sc==='ur'||p.sc==='sd')?'rtl':'ltr';
+    return '<div class="note"><small>'+fmtDate(o.d,L)+(o.e?' — '+esc(t.evt)+' '+fmtDate(o.e,L)+(o.t?' '+esc(o.t):''):'')+'</small>'
+      +'<h4 dir="'+dir+'">'+esc(p.v.s)+'</h4><p dir="'+dir+'">'+esc(p.v.b)+'</p></div>';
+  }).join('');
+}
+var PANES={att:renderAtt,fee:renderFee,res:renderRes,nts:renderNts};
+/*RENDER-END*/
+
+(function(){
+  if(typeof document==='undefined'||!document.getElementById('f'))return;
+  var $=function(i){return document.getElementById(i);};
+  var L='ur',DATA=null,REC=null,TAB='att',fails=0,lockUntil=0;
+  try{var sv=localStorage.getItem('pp_lang');if(sv&&T[sv])L=sv;}catch(e){}
+
+  function setLang(l){
+    L=l;try{localStorage.setItem('pp_lang',l);}catch(e){}
+    var rtl=l!=='en';
+    document.documentElement.lang=l;document.documentElement.dir=rtl?'rtl':'ltr';document.body.className=rtl?'rtl':'';
+    Array.prototype.forEach.call(document.querySelectorAll('.langs button'),function(b){b.setAttribute('aria-pressed',b.dataset.l===l?'true':'false');});
+    var t=T[l];
+    $('stitle').textContent=t.title;$('lGr').textContent=t.gr;$('lPin').textContent=t.pin;$('go').textContent=t.open;$('priv').textContent=t.priv;$('exit').textContent=t.exit;
+    document.title=t.title;
+    if(DATA&&DATA.sch){$('sname').textContent=(l==='en'?DATA.sch.n:(DATA.sch.nu||DATA.sch.n))||t.title;}else $('sname').textContent=t.title;
+    if(REC)show();
+  }
+  function showErr(m){var e=$('err');e.textContent=m;e.hidden=!m;}
+  function show(){
+    var t=T[L];
+    $('login').hidden=true;$('view').hidden=false;
+    $('kid').innerHTML=renderKid(REC,L);
+    $('tabs').innerHTML=['att','fee','res','nts'].map(function(k){return '<button type="button" role="tab" data-k="'+k+'" aria-selected="'+(k===TAB)+'">'+esc(t[k])+'</button>';}).join('');
+    $('pane').innerHTML=PANES[TAB](REC,L);
+    $('upd').textContent=t.updated+': '+fmtDate(REC.upd,L);
+  }
+  async function loadData(){
+    if(DATA)return DATA;
+    var r=await fetch('parentdata.json?t='+Date.now(),{cache:'no-store'});
+    if(!r.ok)throw new Error('http '+r.status);
+    DATA=await r.json();
+    if(DATA.sch)$('sname').textContent=(L==='en'?DATA.sch.n:(DATA.sch.nu||DATA.sch.n))||T[L].title;
+    return DATA;
+  }
+  $('f').addEventListener('submit',async function(ev){
+    ev.preventDefault();showErr('');
+    var t=T[L],now=Date.now();
+    if(now<lockUntil){showErr(t.wait+' '+Math.ceil((lockUntil-now)/1000)+' '+t.sec);return;}
+    if(!(window.crypto&&crypto.subtle)){showErr(t.nocrypto);return;}
+    var btn=$('go');btn.disabled=true;btn.textContent=t.loading;
+    try{
+      var d=await loadData();
+      var rec=await openRecord(d,$('gr').value,$('pin').value);
+      if(rec){REC=rec;fails=0;$('pin').value='';TAB='att';show();window.scrollTo(0,0);}
+      else{fails++;if(fails>=5){lockUntil=Date.now()+30000;fails=0;}showErr(t.wrong);}
+    }catch(e){showErr(t.nodata);}
+    btn.disabled=false;btn.textContent=T[L].open;
+  });
+  $('tabs').addEventListener('click',function(ev){var b=ev.target.closest('button[data-k]');if(!b)return;TAB=b.dataset.k;show();});
+  $('exit').addEventListener('click',function(){REC=null;$('view').hidden=true;$('login').hidden=false;$('gr').value='';$('pin').value='';window.scrollTo(0,0);});
+  Array.prototype.forEach.call(document.querySelectorAll('.langs button'),function(b){b.addEventListener('click',function(){setLang(b.dataset.l);});});
+  setLang(L);
+  loadData().catch(function(){});
+})();
+</script>
+</body>
+</html>
